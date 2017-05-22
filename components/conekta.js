@@ -23,4 +23,18 @@ conekta.Card.getById = function (id) {
     return paymentSource;
 };
 
+Object.defineProperty(conekta, 'cCustomer', {
+    get: function() {
+        cleanResource(this.Customer);
+        console.log(this.Customer);
+        return this.Customer;
+    }
+});
+
+function cleanResource(resource) {
+    resource._id = null;
+    resource._json = {};
+    resource._items = [];
+}
+
 module.exports = conekta;

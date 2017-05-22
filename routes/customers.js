@@ -5,21 +5,20 @@ var log = require('../components/logger')('routes/customers');
 
 // Find customer by email
 router.get('/', function(req, res, next) {
-    conekta.Customer.where({
-        email: req.body.email
+    conekta.cCustomer.where({
+        email: req.query.email
     }, function(err, customer) {
         if (err) {
             res.status(err.http_code).send(err.details);
             return;
         }
-        console.log(customer);
         res.send(customer.toArray());
     });
 });
 
 // Find customer by id
 router.get('/:customer_id/', function(req, res, next) {
-    conekta.Customer.find(req.params.customer_id, function(err, customer) {
+    conekta.cCustomer.find(req.params.customer_id, function(err, customer) {
         if (err) {
             res.status(err.http_code).send(err.details);
             return;
@@ -30,7 +29,7 @@ router.get('/:customer_id/', function(req, res, next) {
 
 // Create a customer
 router.post('/', function(req, res, next) {
-    conekta.Customer.create({
+    conekta.cCustomer.create({
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone
@@ -46,17 +45,17 @@ router.post('/', function(req, res, next) {
 // Remove customer
 // /customers/:customer_id			DELETE
 router.delete('/:customer_id', function(req, res, next) {
-    conekta.Customer.find(req.params.customer_id, function(err, customer) {
+    conekta.cCustomer.find(req.params.customer_id, function(err, customer) {
         if (err) {
             res.status(err.http_code).send(err.details);
             return;
         }
-        customer.delete(function (err, delCustomer) {
+        customer.delete(function (err, delcCustomer) {
             if (err) {
                 res.status(err.http_code).send(err.details);
                 return;
             }
-            res.send(delCustomer.toObject());
+            res.send(delcCustomer.toObject());
         });
     });
 });
@@ -64,7 +63,7 @@ router.delete('/:customer_id', function(req, res, next) {
 // Add a card to a customer
 // /customers/:customer_id/card			POST
 router.post('/:customer_id/card', function(req, res, next) {
-    conekta.Customer.find(req.params.customer_id, function(err, customer) {
+    conekta.cCustomer.find(req.params.customer_id, function(err, customer) {
         if (err) {
             res.status(err.http_code).send(err.details);
             return;
@@ -85,7 +84,7 @@ router.post('/:customer_id/card', function(req, res, next) {
 // Remove a card from a customer
 // /customers/:customer_id/card/:card_id	DELETE
 router.delete('/:customer_id/card/:card_id', function(req, res, next) {
-    conekta.Customer.find(req.params.customer_id, function(err, customer) {
+    conekta.cCustomer.find(req.params.customer_id, function(err, customer) {
         var paymentSource;
         if (err) {
             res.status(err.http_code).send(err.details);
@@ -118,7 +117,7 @@ router.delete('/:customer_id/card/:card_id', function(req, res, next) {
 // Add a subscription to a customer
 // /customers/:customer_id/subscription		POST
 router.post('/:customer_id/subscription', function(req, res, next) {
-    conekta.Customer.find(req.params.customer_id, function(err, customer) {
+    conekta.cCustomer.find(req.params.customer_id, function(err, customer) {
         if (err) {
             res.status(err.http_code).send(err.details);
             return;
@@ -139,7 +138,7 @@ router.post('/:customer_id/subscription', function(req, res, next) {
 // Cancel customer’s subscription
 // /customers/:customer_id/subscription/cancel	POST
 router.post('/:customer_id/subscription/cancel', function(req, res, next) {
-    conekta.Customer.find(req.params.customer_id, function(err, customer) {
+    conekta.cCustomer.find(req.params.customer_id, function(err, customer) {
         if (err) {
             res.status(err.http_code).send(err.details);
             return;
