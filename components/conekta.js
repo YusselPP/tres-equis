@@ -1,9 +1,10 @@
+var config = require('../config');
 var log = require('./logger')('components/conekta');
 var conekta = require('conekta');
 
-conekta.api_key = process.env.CONEKTA_API_KEY;
-conekta.api_version = process.env.CONEKTA_API_VERSION;
-conekta.locale = process.env.CONEKTA_LOCALE;
+conekta.api_key = config.conekta.apiKey;
+conekta.api_version = config.conekta.apiVersion;
+conekta.locale = config.conekta.locale;
 
 conekta.Card.getById = function (id) {
     var paymentSource, paymentSources = this;

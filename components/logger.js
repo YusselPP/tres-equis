@@ -1,7 +1,8 @@
+var config = require('../config');
 var loggerOpts = {
     logDirectory:'./logs',
     fileNamePattern:'<DATE>.log',
-    level: process.env.LOG_LEVEL
+    level: config.log.level
 };
 
 // create a log manager
