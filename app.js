@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var customers = require('./routes/customers');
+var tresEquis = require('./routes/tresEquis');
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 // app.use('/', index);
 app.use('/customers', customers);
+app.use('/tres-equis', tresEquis);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
