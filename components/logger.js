@@ -9,4 +9,9 @@ var loggerOpts = {
 var manager = require('simple-node-logger').createLogManager(loggerOpts);
 manager.createConsoleAppender();
 
-module.exports = manager.createLogger;
+function createLogger(filename) {
+    var path = require('path');
+    return manager.createLogger(path.relative(config.rootDir, filename));
+}
+
+module.exports = createLogger;

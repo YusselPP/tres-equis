@@ -1,24 +1,19 @@
+var shopifyAPI = require('shopify-node-api');
+var nonce = require('nonce-generator');
+
 var config = require('../config');
+var log = require('./logger')(__filename);
 
 var shopify = {};
 
-shopify.getInstallUrl = getInstallUrl;
+module.exports = function () {
+    return new shopifyAPI({
+        shop: config.shopify.shopName, // shop.myshopify.com 
+        shopify_api_key: config.shopify.apiKey, // Your API key 
+        shopify_shared_secret: config.shopify.secret, // Your Shared Secret 
+        shopify_scope: config.shopify.scopes,
+        redirect_uri: config.shopify.appUrl + '/' + config.shopify.shopName + '/auth',
+        nonce: nonce(6) // you must provide a randomly selected value unique for each authorization request
+    });
+};
 
-module.exports = shopify;
-
-
-function getInstallUrl() {
-    var installUrl = [];
-
-    installUrl.push('http://');
-    installUrl.push(config.shopify.shop);
-    installUrl.push('/admin/oauth/authorize?client_id=');
-    installUrl.push(config.shopify.apiKey);
-    installUrl.push('&scope=');
-    installUrl.push(config.shopify.scopes);
-    installUrl.push('&redirect_uri=http://');
-    installUrl.push(config.shopify.appUrl);
-    installUrl.push('/tres-equis/auth');
-
-    return installUrl.join('');
-}

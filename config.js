@@ -1,5 +1,6 @@
 const env = process.env;
 const config = {
+    rootDir: __dirname,
     port: env.PORT,
 
     log: {
@@ -17,7 +18,8 @@ const config = {
         apiKey: env.SHOPIFY_API_KEY,
         secret: env.SHOPIFY_SECRET,
 
-        shop: 'miel-tres-equis.myshopify.com',
+        shopName: 'miel-tres-equis',
+        shopUrl: 'miel-tres-equis.myshopify.com',
         scopes: 'read_content, read_products, read_customers'
     }
 };

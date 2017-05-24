@@ -1,5 +1,5 @@
 var config = require('../config');
-var log = require('./logger')('components/conekta');
+var log = require('./logger')(__filename);
 var conekta = require('conekta');
 
 conekta.api_key = config.conekta.apiKey;
@@ -26,9 +26,8 @@ conekta.Card.getById = function (id) {
 
 Object.defineProperty(conekta, 'cCustomer', {
     get: function() {
-        cleanResource(this.Customer);
-        console.log(this.Customer);
-        return this.Customer;
+        cleanResource(conekta.Customer);
+        return conekta.Customer;
     }
 });
 
