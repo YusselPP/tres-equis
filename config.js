@@ -18,9 +18,9 @@ const config = {
         apiKey: env.SHOPIFY_API_KEY,
         secret: env.SHOPIFY_SECRET,
 
-        shopName: 'miel-tres-equis',
-        shopUrl: 'miel-tres-equis.myshopify.com',
-        scopes: 'read_content, read_products, read_customers'
+        shopName: 'recurring-charges',
+        shopUrl: 'yussel.myshopify.com',
+        scopes: 'read_content, write_products, write_orders, read_customers, write_script_tags'
     }
 };
 

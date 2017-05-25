@@ -8,6 +8,8 @@ router.get('/install', RecurringChargesCtrl.install);
 
 router.get('/auth', RecurringChargesCtrl.auth);
 
+router.use(express.static('proxy-scripts'));
+
 module.exports = {
     rootUrl: '/recurring-charges',
     router: router
