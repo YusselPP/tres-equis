@@ -13,6 +13,10 @@ router.get('/auth', RecurringChargesCtrl.auth);
     res.send('{{product.id}}');
 });*/
 
+router.use(express.static('proxy-liquid', { setHeaders: function (res) {
+    res.set('Content-type', 'application/liquid');
+}}));
+
 router.use(express.static('proxy-scripts'));
 
 module.exports = {
