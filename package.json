@@ -14,8 +14,8 @@
     "express": "4.15.2",
     "helmet": "3.6.1",
     "morgan": "1.8.1",
-    "nonce-generator": "^1.0.2",
-    "shopify-node-api": "     1.7.7",
+    "nonce-generator": "1.0.2",
+    "shopify-node-api": "1.7.7",
     "simple-node-logger": "0.93.24"
   }
 }
