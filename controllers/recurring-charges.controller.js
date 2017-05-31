@@ -1,10 +1,14 @@
+var path = require('path');
+
 var config = require('../config');
 var log = require('../components/logger')(__filename);
 var Shopify = require('../components/shopify')();
 
 module.exports = {
     install: install,
-    auth: auth
+    auth: auth,
+    login: login,
+    subscribe: subscribe
 };
 
 function install(req, res) {
@@ -23,4 +27,20 @@ function auth(req, res) {
     res.send({
         query: req.query
     });
+}
+
+function login(req, res) {
+    sendLiquidFile(res, '../proxy-liquid/login.liquid');
+}
+
+function subscribe(req, res) {
+    sendLiquidFile(res, '../proxy-liquid/subscribe.liquid');
+}
+
+
+/* Helper functions */
+
+function sendLiquidFile(res, filePath) {
+    res.set('Content-type', 'application/liquid');
+    res.sendFile(path.join(__dirname, filePath));
 }

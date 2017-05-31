@@ -8,10 +8,9 @@ router.get('/install', RecurringChargesCtrl.install);
 
 router.get('/auth', RecurringChargesCtrl.auth);
 
-/*router.get('/product-subscribe-form.js', function (req, res) {
-    res.header('Content-Type', 'application/liquid');
-    res.send('{{product.id}}');
-});*/
+router.get('/login', RecurringChargesCtrl.login);
+
+router.get('/subscribe', RecurringChargesCtrl.subscribe);
 
 router.use(express.static('proxy-liquid', { setHeaders: function (res) {
     res.set('Content-type', 'application/liquid');

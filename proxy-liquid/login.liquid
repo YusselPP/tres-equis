@@ -2,19 +2,9 @@
     <div class="grid">
 
         <script>
-            (function () {
-                $('#CustomerLoginForm input[name="checkout_url"]').val(getParameterByName('product_id'));
-
-                function getParameterByName(name, url) {
-                    if (!url) url = window.location.href;
-                    name = name.replace(/[\[\]]/g, "\\$&");
-                    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                            results = regex.exec(url);
-                    if (!results) return null;
-                    if (!results[2]) return '';
-                    return decodeURIComponent(results[2].replace(/\+/g, " "));
-                }
-            }());
+            AymaRecurring.then(function (aymaRecurring) {
+                aymaRecurring.setLoginRedirectUrl();
+            });
         </script>
 
         <div class="grid__item medium-up--one-half medium-up--push-one-quarter">
@@ -29,7 +19,7 @@
 
                 {{ form.errors | default_errors }}
 
-                <input type="hidden" name="checkout_url" value="/apps/recurring-charges/subscribe-form/?product_id=1" />
+                <input type="hidden" name="checkout_url" value="" />
 
                 <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
                 <input type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" autocorrect="off" autocapitalize="off" autofocus>
