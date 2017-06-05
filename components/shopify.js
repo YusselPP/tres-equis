@@ -13,7 +13,8 @@ module.exports = function () {
         shopify_shared_secret: config.shopify.secret, // Your Shared Secret 
         shopify_scope: config.shopify.scopes,
         redirect_uri: config.shopify.appUrl + '/' + config.shopify.shopName + '/auth',
-        nonce: '' // you must provide a randomly selected value unique for each authorization request
+        nonce: '', // you must provide a randomly selected value unique for each authorization request,
+        access_token: config.shopify.accessToken // Access token changes when the app is reinstalled
     });
 };
 

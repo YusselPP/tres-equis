@@ -1,15 +1,63 @@
 {% unless customer %}
-<script>
-    window.location.href = '/apps/recurring-charges/login';
-</script>
+    <script>
+        (function () {
+            var waitInterval = setInterval(function () {
+                if (typeof AymaRecurring !== 'undefined') {
+                    clearInterval(waitInterval);
+                    AymaRecurring.then(function (aymaRecurring) {
+                        aymaRecurring.redirectToLogin();
+                    });
+                }
+            }, 250);
+        }());
+    </script>
+{% else %}
+    <div class="page-width">
+        <div class='card-wrapper'></div>
+        <form id="newSubscription" action="" method="post">
+            <input type="hidden" name="customer_id" value="{{ customer.id }}">
+
+            <button type="submit" class="btn">Suscribirse</button>
+        </form>
+
+        <form id="newCreditCard" action="">
+            <input type="text" name="number" data-conekta="card[number]"/>
+            <input type="text" name="name" data-conekta="card[name]"/>
+            <input type="text" name="expiry" data-conekta="card[exp_month]"/>
+            <input type="text" name="cvc" data-conekta="card[cvc]"/>
+
+            <button type="submit" class="btn">Agregar tarjeta</button>
+        </form>
+
+        <form action="" method="POST" id="card-form">
+            <span class="card-errors"></span>
+            <div>
+                <label>
+                    <span>Nombre del tarjetahabiente</span>
+                    <input type="text" size="20" data-conekta="card[name]">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>Número de tarjeta de crédito</span>
+                    <input type="text" size="20" data-conekta="card[number]">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>CVC</span>
+                    <input type="text" size="4" data-conekta="card[cvc]">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>Fecha de expiración (MM/AAAA)</span>
+                    <input type="text" size="2" data-conekta="card[exp_month]">
+                </label>
+                <span>/</span>
+                <input type="text" size="4" data-conekta="card[exp_year]">
+            </div>
+            <button type="submit">Crear token</button>
+        </form>
+    </div>
 {% endunless %}
-
-<script>
-
-</script>
-
-<div class="subscribe-form-container page-width">
-    <form class="subscribe-form" action="/apps/recurring-charges/credit-card-form/">
-        <button type="submit" class="btn">Suscribirs</button>
-    </form>
-</div>

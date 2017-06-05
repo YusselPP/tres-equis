@@ -8,7 +8,9 @@ module.exports = {
     install: install,
     auth: auth,
     login: login,
-    subscribe: subscribe
+    subscribe: subscribe,
+    newSubscription: newSubscription,
+    getProductMetafields: getProductMetafields
 };
 
 function install(req, res) {
@@ -35,6 +37,25 @@ function login(req, res) {
 
 function subscribe(req, res) {
     sendLiquidFile(res, '../proxy-liquid/subscribe.liquid');
+}
+
+function newSubscription(req, res) {
+    console.log(req);
+    res.send({});
+}
+
+function getProductMetafields(req, res) {
+    var query = {
+        key: req.query.key,
+        namespace: req.query.namespace
+    };
+    Shopify.get('/admin/products/' + req.params.product_id + '/metafields.json', query, function (err, data, headers) {
+        if (err) {
+            res.status(err.code).send(err);
+            return;
+        }
+        res.send(data);
+    });
 }
 
 

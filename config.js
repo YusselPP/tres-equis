@@ -17,6 +17,7 @@ const config = {
         appUrl: env.SHOPIFY_APP_URL,
         apiKey: env.SHOPIFY_API_KEY,
         secret: env.SHOPIFY_SECRET,
+        accessToken: env.SHOPIFY_ACCESS_TOKEN,
 
         shopName: 'recurring-charges',
         shopUrl: 'yussel.myshopify.com',
